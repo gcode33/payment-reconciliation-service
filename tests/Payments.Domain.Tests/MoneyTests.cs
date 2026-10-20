@@ -85,6 +85,11 @@ public sealed class MoneyTests
         Assert.Throws<OverflowException>(() => -Money.Of(long.MinValue, Currency.CAD));
 
     [Fact]
+    public void A_default_Money_cannot_be_mixed_with_real_money() =>
+        // default(Money) has currency 0, which is not a real currency (SPEC §7.1).
+        Assert.Throws<CurrencyMismatchException>(() => default(Money) + Money.Of(100, Currency.CAD));
+
+    [Fact]
     public void Equal_amounts_in_different_currencies_are_not_equal() =>
         Assert.NotEqual(Money.Of(100, Currency.CAD), Money.Of(100, Currency.USD));
 
