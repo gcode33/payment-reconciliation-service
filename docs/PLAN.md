@@ -1,6 +1,10 @@
 # Build plan: Payment Reconciliation Service
 
-Implements `SPEC.md` v1.1. Status: **draft, 2026-10-19. Awaiting George's approval.**
+Implements `SPEC.md` v1.1. Status: **approved, 2026-10-19.**
+
+> **Update 2026-10-19:** George has handed all implementation and Git work to Claude. Where a
+> step says "George writes", Claude now writes it, explains it in the PR, and George reads every
+> PR so he can explain the design in interviews. He also keeps `docs/decisions/` current.
 
 Each step below is **one branch and one PR** off `main`, built test-first. Claude commits,
 pushes, opens the PR, reviews it and squash-merges it once CI is green (in background sessions,
