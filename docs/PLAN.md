@@ -2,8 +2,9 @@
 
 Implements `SPEC.md` v1.1. Status: **draft, 2026-10-19. Awaiting George's approval.**
 
-Each step below is **one branch and one PR** off `main`, built test-first. Claude opens the PR;
-George reviews and squash-merges. Each phase ends with a tag and a short release note. We stop
+Each step below is **one branch and one PR** off `main`, built test-first. Claude commits,
+pushes, opens the PR, reviews it and squash-merges it once CI is green (in background sessions,
+which may not merge, Claude hands George a one-line merge command). Each phase ends with a tag and a short release note. We stop
 for George's go-ahead before starting each new phase.
 
 The order builds a **thin, correct core first** (money, states, ledger, against the mock), then
@@ -18,7 +19,8 @@ That way every Stripe surprise is a provider problem, not a ledger bug.
 3. **Build**: make them pass. "Who writes it" says whether George writes the code (Claude
    reviews and explains) or Claude writes it (George reviews and must be able to explain it).
 4. **Verify**: CI green, plus the step's manual check.
-5. **PR**: template filled in, invariants touched listed. George merges.
+5. **PR**: template filled in, invariants touched listed. Claude reviews and merges; George
+   reads it.
 6. **Lesson**: write or update the vault lesson with the real commands and output.
 
 Time estimates assume part-time work alongside the Lynked job: about 13 weeks in total.
