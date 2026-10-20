@@ -176,6 +176,10 @@ lesson *Money as Integer Cents*.
                                Unknown ──resolver──▶ Authorized | Declined
 ```
 
+- One capture per payment, for up to the authorised amount; the rest is released. A failed
+  capture can be retried (docs/decisions/0004).
+- A refund that fails after succeeding moves the payment back: `PartiallyRefunded → Captured`,
+  `Refunded → PartiallyRefunded` and `Refunded → Captured` (docs/decisions/0004).
 - Only these edges are allowed; any other transition throws a domain error and is a `409` at
   the API.
 - Captures and refunds have their own small state machines (`Pending → Succeeded | Failed |
