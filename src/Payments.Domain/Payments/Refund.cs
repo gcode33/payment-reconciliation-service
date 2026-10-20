@@ -15,5 +15,16 @@ public sealed class Refund
 
     public OperationStatus Status { get; private set; }
 
-    internal void MoveTo(OperationStatus to) => throw new NotImplementedException();
+    /// <summary>True while the provider may still move money for this refund.</summary>
+    public bool IsInFlightOrSucceeded => Status is OperationStatus.Pending or OperationStatus.Unknown or OperationStatus.Succeeded;
+
+    internal void MoveTo(OperationStatus to)
+    {
+        if (!PaymentStateMachine.IsAllowed(Status, to, allowLateFailure: true))
+        {
+            throw new InvalidTransitionException(nameof(Refund), Status, to);
+        }
+
+        Status = to;
+    }
 }
