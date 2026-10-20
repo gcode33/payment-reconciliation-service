@@ -361,15 +361,17 @@ a weekly scheduled CI job, not on every PR (cost). Results go in the README.
 
 ### 12.1 Workflow
 - `main` is protected: changes arrive only through pull requests, with CI green (once CI exists,
-  from phase 0) and George's review. No direct pushes, no force-pushes. GitHub does not let an
-  author approve their own PR, and PRs are opened from George's account, so the rule requires
-  a PR but not a formal approval; George's review is the merge itself.
+  from phase 0). No direct pushes, no force-pushes. PRs are opened from George's account, and
+  GitHub doesn't let an author approve their own PR, so the rule requires a PR but not a formal
+  approval.
 - Branch names: `feat/…`, `fix/…`, `test/…`, `docs/…`, `chore/…`, `infra/…`, `ci/…`.
 - Commits follow Conventional Commits (`feat(ledger): post capture journals`).
 - One PR = one reviewable slice (aim for < 400 changed lines, tests included). The PR template
   asks: what, why, how it was tested, screenshots or trace links.
-- Claude opens PRs; **George reviews and merges** (squash merge); the branch is deleted
-  automatically.
+- **Claude does the Git work**: commits, pushes, opens each PR, reviews it (a review comment
+  with findings) and squash-merges it once CI is green; the branch is deleted automatically.
+  In background sessions, which may not merge, Claude stops at a green, reviewed PR and gives
+  George the one-line merge command. George reads every PR so he can explain it.
 - Each phase ends with a tag (`v0.1.0` …) and a short release note.
 
 ### 12.2 Milestones
