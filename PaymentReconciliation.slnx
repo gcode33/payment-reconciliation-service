@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MockProvider/MockProvider.csproj" />
+    <Project Path="src/Payments.Api/Payments.Api.csproj" />
+    <Project Path="src/Payments.Domain/Payments.Domain.csproj" />
+    <Project Path="src/Payments.Infrastructure/Payments.Infrastructure.csproj" />
+    <Project Path="src/Payments.Worker/Payments.Worker.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Payments.Domain.Tests/Payments.Domain.Tests.csproj" />
+    <Project Path="tests/Payments.IntegrationTests/Payments.IntegrationTests.csproj" />
+  </Folder>
+</Solution>
