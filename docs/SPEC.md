@@ -1,7 +1,7 @@
 # Spec: Payment Reconciliation Service
 
 Status: **v1 draft, 2026-10-19. Awaiting George's review.** Nothing is built until this is
-approved. Open decisions are listed in §14.
+approved. Decisions taken so far are listed in §14.
 
 ## 1. In plain words
 
@@ -278,8 +278,10 @@ a weekly scheduled CI job, not on every PR (cost). Results go in the README.
 ## 12. Delivery: Git workflow and milestones
 
 ### 12.1 Workflow
-- `main` is protected: changes arrive only through pull requests, with CI green and at least one
-  review (George's). No direct pushes, no force-pushes.
+- `main` is protected: changes arrive only through pull requests, with CI green (once CI exists,
+  from phase 0) and George's review. No direct pushes, no force-pushes. GitHub does not let an
+  author approve their own PR, and PRs are opened from George's account, so the rule requires
+  a PR but not a formal approval; George's review is the merge itself.
 - Branch names: `feat/…`, `fix/…`, `test/…`, `docs/…`, `chore/…`, `infra/…`.
 - Commits follow Conventional Commits (`feat(ledger): post capture journals`).
 - One PR = one reviewable slice (aim for < 400 changed lines, tests included). The PR template
@@ -308,11 +310,9 @@ a weekly scheduled CI job, not on every PR (cost). Results go in the README.
 | AI cost | Haiku for eval runs; eval not on every PR; feature off without a key |
 | "AI wrote it" doubts in interviews | George writes or rewrites the domain layer himself and keeps a decisions log in `docs/decisions/` |
 
-## 14. Open decisions for George
+## 14. Decisions (George, 2026-10-19)
 
-1. **Repo name and visibility**: working name `payment-reconciliation-service`, public on
-   `github.com/gcode33` (recommended, since recruiters need to see it).
-2. **Test framework**: xUnit (recommended, most common in new .NET code) or NUnit (which
-   George has used before).
-3. **Ops console**: React + TypeScript (recommended) or Blazor.
-4. **Licence**: MIT (recommended for a portfolio) or none.
+1. **Repo**: `payment-reconciliation-service`, public on `github.com/gcode33`.
+2. **Test framework**: xUnit.
+3. **Ops console**: React + TypeScript.
+4. **Licence**: MIT.
