@@ -220,8 +220,9 @@ any failure can be replayed exactly.
 - **I3** One idempotency key leads to at most one provider charge, even with 50 concurrent
   identical requests.
 - **I4** Refunds never exceed the captured amount; captures never exceed the authorised amount.
-- **I5** After reconciliation of day D, `provider_clearing` for D is zero, or every non-zero
-  cent is linked to an open exception.
+- **I5** After reconciliation of day D, the `provider_clearing` balance of the journals linked to
+  D's captures, refunds and settlement rows is zero, or every non-zero cent is linked to an
+  open exception.
 - **I6** Every state change follows an allowed edge (§7.2).
 - **I7** Importing the same settlement file twice changes nothing.
 
@@ -293,7 +294,7 @@ a weekly scheduled CI job, not on every PR (cost). Results go in the README.
 
 | Phase | PRs (branches) | Done when |
 |---|---|---|
-| **0. Setup** | `docs/spec` (this), `chore/solution-skeleton` (solution, projects, compose with Postgres, CI build+test, PR template, branch protection) | CI green on an empty test |
+| **0. Setup** | `docs/spec` (this PR: spec, PR template, licence; branch protection set on GitHub), `chore/solution-skeleton` (solution, projects, compose with Postgres, CI build+test, CI made a required check on `main`) | CI green on an empty test |
 | **1. Core payments** (~3–4 wks) | `feat/money-and-state-machine`, `feat/ledger`, `feat/mock-provider`, `feat/payments-api-idempotency`, `feat/unknown-resolver`, `test/chaos-suite-v1` | I1–I4, I6 pass; chaos scenarios for timeouts and concurrency pass → **v0.1.0** |
 | **2. Reconciliation** (~2–3 wks) | `feat/settlement-import`, `feat/reconciliation-matcher`, `feat/exceptions-workflow`, `feat/ops-console` | I5, I7 pass; `settlement_with_every_defect` raises exactly the expected exceptions → **v0.2.0** |
 | **3. Operations** (~2 wks) | `feat/otel`, `docs/runbook`, `infra/terraform-aws`, `ci/security-scans` (CodeQL, dependency review, gitleaks), `ci/deploy` | Dashboards and alerts work locally; demo deploys to AWS and tears down cleanly → **v0.3.0** |
